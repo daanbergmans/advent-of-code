@@ -1,5 +1,5 @@
-# Advent of Code 2022
-Advent of Code 2022 in Javascript.
+# Advent of Code
+Advent of Code in Javascript for multiple years.
 
 # Years
 ┌ [2020](2020/)\
