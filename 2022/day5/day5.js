@@ -13,7 +13,7 @@ const stacksText = array.slice(0, 8).map(l =>
 const instructions = array.slice(10, array.length).map((i) => 
     i.split(' ').filter((v) => 
         !isNaN(v)).map((i) =>
-            parseInt(i, 10)))
+            parseInt(i, 10)));
 
 const getStacks = (stacksText) => {
     const stacks = Array.from({ length: 9 }, () => []);
@@ -37,7 +37,6 @@ const followInstructions = (stacks, instructions, reverse) => {
 
     return stacks;
 }
-
 
 const part1 = () => followInstructions(getStacks(stacksText), instructions, true).reduce((stacks, stack) => stacks + stack[stack.length - 1], '');
 
