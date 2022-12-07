@@ -6,3 +6,6 @@ Advent of Code in Javascript for multiple years.
 ├ 2021\
 └ [2022](2022/)
 
+# Todo
+- 2022:
+    - Day 7: Clean up
