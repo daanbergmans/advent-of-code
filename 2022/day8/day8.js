@@ -28,61 +28,33 @@ const checkTreeRow = (treeRowIndex, forest) =>
 
 const checkTree = (treeRowIndex, treeColIndex, treeHeight, treeRow, treeCol) => checkBothSides(treeRow, treeRowIndex, treeColIndex, treeHeight) || checkBothEnds(treeCol, treeRowIndex, treeColIndex, treeHeight);
 
-const checkBothSides = (row, treeColIndex, treeHeight) => checkSideOfTree(row, treeColIndex, treeHeight, true) || checkSideOfTree(row, treeColIndex, treeHeight, false)
+const checkBothSides = (row, treeRowIndex, treeColIndex, treeHeight) => checkSideOfTree(row, treeRowIndex, treeColIndex, treeHeight, true) || checkSideOfTree(row, treeRowIndex, treeColIndex, treeHeight, false)
 
-const checkBothEnds = (col, treeRowIndex, treeHeight) => checkEndOfTree(col, treeRowIndex, treeHeight, true) || checkEndOfTree(col, treeRowIndex, treeHeight, false)
+const checkBothEnds = (col, treeRowIndex, treeColIndex, treeHeight) => checkEndOfTree(col, treeRowIndex, treeColIndex, treeHeight, true) || checkEndOfTree(col, treeRowIndex, treeColIndex, treeHeight, false)
 
-const checkSideOfTree = (row, treeRowIndex, treeColIndex, treeHeight, left) => {
-    if (isBorder(treeRowIndex, treeColIndex)) return true;
+const checkSideOfTree = (row, treeRowIndex, treeColIndex, treeHeight, left) => 
+    isBorder(treeRowIndex, treeColIndex) ||
+    Math.max(
+        ...(left 
+            ? (treeColIndex === 0 
+                ? [0] 
+                : row.slice(0, treeColIndex)) 
+            : (treeColIndex === row.size - 1 
+                ? [0] 
+                : row.slice(treeColIndex + 1, row.length)))
+    ) < treeHeight;
 
-    const test = left 
-    ? (treeColIndex === 0 
-        ? [0] 
-        : row.slice(0, treeColIndex)) 
-    : (treeColIndex === row.size - 1 
-        ? [0] 
-        : row.slice(treeColIndex + 1, row.length))
-    
-    const test2 = Math.max(...test);
-    
-    const test3 = test2 < treeHeight;
-
-    return test3;
-}
-    // Math.max(...(left 
-    //     ? (treeColIndex === 0 
-    //         ? [0] 
-    //         : row.slice(0, treeColIndex)) 
-    //     : (treeColIndex === row.size - 1 
-    //         ? [0] 
-    //         : row.slice(treeColIndex + 1, row.length))
-    //     )) < treeHeight
-
-const checkEndOfTree = (col, treeRowIndex, treeColIndex, treeHeight, top) =>  {
-    if (isBorder(treeRowIndex, treeColIndex)) return true;
-
-    const test = top 
-    ? (treeRowIndex === 0 
-        ? [0] 
-        : col.slice(0, treeRowIndex)) 
-    : (treeRowIndex === col.length - 1 
-        ? [0] 
-        : col.slice(treeRowIndex + 1, col.length))
-
-    const test2 = Math.max(...test);
-
-    const test3 = test2 < treeHeight;
-
-    return test3;
-}
-    // Math.max(...(top 
-    //     ? (treeRowIndex === 0 
-    //         ? [0] 
-    //         : col.slice(0, treeRowIndex)) 
-    //     : (treeRowIndex === col.length - 1 
-    //         ? [0] 
-    //         : col.slice(treeRowIndex + 1, col.length))
-    //     )) < treeHeight
+const checkEndOfTree = (col, treeRowIndex, treeColIndex, treeHeight, top) =>
+    isBorder(treeRowIndex, treeColIndex) ||
+    Math.max(
+        ...(top 
+            ? (treeRowIndex === 0 
+                ? [0] 
+                : col.slice(0, treeRowIndex)) 
+            : (treeRowIndex === col.length - 1 
+                ? [0] 
+                : col.slice(treeRowIndex + 1, col.length)))
+    ) < treeHeight;
 
 const isBorder = (treeRowIndex, treeColIndex) => treeColIndex === 0 || treeColIndex === FOREST_WIDTH - 1 || treeRowIndex === 0 || treeRowIndex === FOREST_LENGTH - 1;
 
