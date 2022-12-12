@@ -1,6 +1,7 @@
 const fs = require("fs");
 
 const text = fs.readFileSync("./data.txt", { encoding: "utf-8" });
+
 const lines = text
     .replaceAll('\r\n', '\n')
     .split('\n')
@@ -83,3 +84,20 @@ console.log('Part 1: ', part1());
 
 // Part 2
 console.log('Part 2: ', part2());
+
+
+// const parseFileSystem = () => lines.reduce((object, line) => parseCommand(object, line), {});
+
+// const parseCommand = (object, line) => {
+//     if (Object.keys(object).length === 0) object = fileSystem;
+
+//     if (line.substring(0, 3) === 'dir') return createDir(object, line);
+//     if (line === '$ cd ..') return previousDir(object, line)
+//     if (line.substring(0, 4) === '$ cd') return nextDir(object, line);
+//     return createFile(object, line)
+// }
+
+// const createDir = (object, line) => ({...object, children: [...object.children, { parent: {...object}, name: line, children: [] }]});
+// const previousDir = (object) => ({...object.parent});
+// const nextDir = (object, line) => ({...object.children.filter((c) => c.name === 'dir ' + line.slice(5))[0]});
+// const createFile = (object, line) => ({...object, children: [...object.children, { parent: {...object}, name: line, children: null}]});

@@ -9,4 +9,7 @@ Advent of Code in Javascript for multiple years.
 # Todo
 - 2022:
     - Day 7: Clean up
-    - Day 8: Continue
+    - Day 8: Clean up
+    - Day 9: WIP
+    - Day 10: WIP
+    - Day 11: WIP
